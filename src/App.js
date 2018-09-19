@@ -14,6 +14,34 @@ const Image = (props) => {
   )
 }
 
+class Timer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { seconds: 0 };
+  }
+
+  tick() {
+    this.setState(state => ({
+      seconds: state.seconds + 1
+    }));
+  }
+
+  componentDidMount() {
+    this.interval = setInterval(() => this.tick(), 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  render() {
+    return (
+      <div>
+        Seconds: {this.state.seconds}
+      </div>
+    );
+  }
+}
 
 class App extends Component {
   render() {
@@ -25,14 +53,13 @@ class App extends Component {
           
           <h1 className="App-title">Welcome to React - from HSBC !!</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <div><Timer /></div>
          
+         <div>
          <Image src1='https://www.w3schools.com/html/pic_trulli.jpg'/>
          <Image src1='https://www.w3schools.com/html/img_girl.jpg'/>
          <Image src1='https://www.w3schools.com/html/img_chania.jpg'/>
-
+         </div>
          <Hello/>
          </div>
     );   
